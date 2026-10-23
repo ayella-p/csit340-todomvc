@@ -30,9 +30,8 @@ function Todos() {
   function handleDelete(id) {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
-const itemsLeft = todos.filter((todo) => !todo.completed).length
-  
-  
+  const itemsLeft = todos.filter((todo) => !todo.completed).length;
+
   return (
     <section className="mx-auto max-w-[550px]">
       <h1 className="text-center text-[80px] font-extralight text-[#b83f45]">
@@ -92,7 +91,8 @@ const itemsLeft = todos.filter((todo) => !todo.completed).length
             </main>
             <footer className="grid h-10 grid-cols-3 items-center border-t border-[#e6e6e6] px-[15px] text-[15px]">
               <span>
-                <strong className="font-light">{itemsLeft}</strong> {itemsLeft === 1 ? 'item' : 'items'} left
+                <strong className="font-light">{itemsLeft}</strong>{" "}
+                {itemsLeft === 1 ? "item" : "items"} left
               </span>
               <ul className="flex justify-center gap-1">
                 <li>
@@ -120,12 +120,17 @@ const itemsLeft = todos.filter((todo) => !todo.completed).length
                   </button>
                 </li>
               </ul>
-              <button
-                type="button"
-                className="cursor-pointer justify-self-end hover:underline"
-              >
-                Clear completed
-              </button>
+              {todos.some((todo) => todo.completed) && (
+                <button
+                  type="button"
+                  className="cursor-pointer justify-self-end hover:underline"
+                  onClick={() =>
+                    setTodos(todos.filter((todo) => !todo.completed))
+                  }
+                >
+                  Clear completed
+                </button>
+              )}
             </footer>
           </>
         )}
