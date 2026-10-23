@@ -26,6 +26,10 @@ function Todos() {
       ),
     );
   }
+  function handleAllToggle() {
+    const allCompleted = todos.every((todo) => todo.completed);
+    setTodos(todos.map((todo) => ({ ...todo, completed: !allCompleted })));
+  }
 
   function handleDelete(id) {
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -49,7 +53,13 @@ function Todos() {
         {todos.length > 0 && (
           <>
             <main className="relative border-t border-[#e6e6e6]">
-              <input id="toggle-all" type="checkbox" className="peer sr-only" />
+              <input
+                id="toggle-all"
+                type="checkbox"
+                className="peer sr-only"
+                onChange={handleAllToggle}
+                checked={todos.every((todo) => todo.completed)}
+              />
               <label
                 htmlFor="toggle-all"
                 className="absolute -top-[66px] left-0 flex h-[65px] w-[60px] cursor-pointer items-center justify-center text-[22px] text-[#949494] peer-checked:text-[#484848]"
